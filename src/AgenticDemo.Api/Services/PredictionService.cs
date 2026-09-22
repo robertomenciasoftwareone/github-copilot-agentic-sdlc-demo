@@ -12,8 +12,7 @@ public sealed class PredictionService
         ArgumentException.ThrowIfNullOrWhiteSpace(userName);
         ArgumentException.ThrowIfNullOrWhiteSpace(match);
 
-        // TRAINING BUG:
-        // negative bonus points are deliberately not validated.
+        // TODO: complete BonusPoints validation during the demo.
 
         return bonusPoints;
     }
