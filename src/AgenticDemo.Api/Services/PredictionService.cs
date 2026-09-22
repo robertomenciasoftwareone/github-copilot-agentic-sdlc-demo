@@ -19,7 +19,12 @@ public sealed class PredictionService
                 "Goals cannot be negative.");
         }
 
-        // BonusPoints is still deliberately missing.
+        if (bonusPoints < 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(bonusPoints),
+                "Bonus points cannot be negative.");
+        }
 
         return bonusPoints;
     }
