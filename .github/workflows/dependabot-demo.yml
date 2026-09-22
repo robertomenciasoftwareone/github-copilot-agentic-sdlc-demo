@@ -15,7 +15,7 @@ jobs:
       # They are here to make a version-update PR easy to demonstrate.
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "8.0.x"
 
