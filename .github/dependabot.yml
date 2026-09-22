@@ -1,0 +1,23 @@
+version: 2
+
+updates:
+  # .NET / NuGet version updates.
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+
+  # GitHub Actions are dependencies too.
+  # For GitHub Actions, directory "/" means Dependabot will scan
+  # .github/workflows and action.yml/action.yaml files.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"

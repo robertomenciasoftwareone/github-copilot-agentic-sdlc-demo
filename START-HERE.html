@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>START HERE — Agentic SDLC V2</title>
+<style>
+body{font-family:Segoe UI,Arial;background:#0d1117;color:#e6edf3;line-height:1.6;margin:0}
+header{padding:40px 6vw;background:#161b22;border-bottom:1px solid #30363d}
+main{max-width:1180px;margin:auto;padding:30px 6vw 90px}
+h1{font-size:42px;margin:0}h2{color:#79c0ff;margin-top:44px}h3{color:#d2a8ff}
+.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:18px;margin:14px 0}
+.do{border-left:5px solid #3fb950}.say{border-left:5px solid #2f81f7}.why{border-left:5px solid #a371f7}.warn{border-left:5px solid #d29922}.fallback{border-left:5px solid #f85149}
+pre{background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:14px;overflow:auto}
+code{font-family:Consolas,monospace}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #30363d;padding:10px;text-align:left;vertical-align:top}th{background:#21262d}
+</style>
+</head>
+<body>
+<header>
+<h1>GitHub Agentic SDLC 2026 — V2</h1>
+<p>Teleprompter completo · Dependabot integrado en la demo.</p>
+</header>
+<main>
+
+<h2>0. ANTES DE ENTRAR</h2>
+<div class="card do">
+<b>Ejecuta:</b>
+<pre>Set-ExecutionPolicy -Scope Process Bypass
+
+.\scripts\01-preflight.ps1
+.\scripts\02-prepare-demo.ps1
+
+.\scripts\03-publish-to-github.ps1 `
+  -RepoName "github-copilot-agentic-sdlc-demo"</pre>
+</div>
+
+<div class="card do">
+<b>Prepara Dependabot ANTES de la sesión:</b>
+<pre>Insights
+→ Dependency graph
+→ Dependabot
+→ GitHub Actions
+→ Recent update jobs
+→ Check for updates
+
+Repite para NuGet.</pre>
+<p>Deja abierto un PR creado por Dependabot.</p>
+</div>
+
+<div class="card do">
+<b>Prepara el PR funcional:</b>
+<p>Abre `Validate prediction bonus points`, espera CI rojo y añade:</p>
+<pre>Bonus points must not accept negative values.
+Please add a regression-safe validation
+without weakening the existing test.</pre>
+</div>
+
+<h2>1. 00:00–08:00 — APERTURA</h2>
+<div class="card say">
+<p>“¿Cuántos utilizáis Copilot casi todos los días? ¿Agent Mode? ¿Custom Agents? ¿Skills?”</p>
+<p>“Perfecto. Hoy no vamos a aprender a crear agentes.”</p>
+<p>“Vamos a aprender a operar una organización donde los agentes ya existen.”</p>
+</div>
+<div class="card do">
+<pre>Issue / PR / horario / alerta
+            ↓
+       Agent session
+            ↓
+ tools + repo + shell + checks
+            ↓
+      trabajo verificable</pre>
+</div>
+
+<h2>2. 08:00–24:00 — AGENTS + TRAZABILIDAD</h2>
+<div class="card do">
+<p>Repo → Agents. Crea una sesión:</p>
+<pre>Investigate this repository.
+
+Find the most important issue that could cause a production incident.
+
+Do not modify code initially.
+
+Explain:
+- the evidence
+- affected files
+- likely failure path
+- what still requires human verification
+
+Only after the investigation, propose the smallest safe remediation.</pre>
+</div>
+<div class="card say">
+<p>“No miréis todavía la respuesta. Mirad cómo trabaja.”</p>
+<p>“Aquí puedo auditar tools, búsquedas, comandos y diffs. Esto es trazabilidad.”</p>
+</div>
+
+<h2>3. 24:00–33:00 — WEB → COPILOT CLI</h2>
+<div class="card do">
+<p>Continue in Copilot CLI → copia el comando → ejecútalo.</p>
+<pre>Summarize what you already investigated.
+
+Tell me:
+- what you are confident about
+- what remains uncertain
+- what requires human verification</pre>
+</div>
+<div class="card say">
+<p>“No estoy creando otro chat. Estoy continuando la misma sesión desde otra interfaz.”</p>
+</div>
+
+<h2>4. 33:00–43:00 — CHRONICLE</h2>
+<div class="card do">
+<pre>/chronicle</pre>
+<pre>Summarize my recent agent sessions related to bugs, CI or security.
+
+What recurring problems appear?</pre>
+</div>
+<div class="card say">
+<p>“Git history es historia del código. Esto es memoria operacional del trabajo agentic.”</p>
+</div>
+
+<h2>5. 43:00–57:00 — AUTOMATIONS</h2>
+<div class="card do">
+<p>Agents → Automations → Create new.</p>
+<pre>Name: Daily Repository Health
+Trigger: Daily
+
+Review this repository for:
+- failing or flaky tests
+- stale TODO/FIXME
+- dependency risks
+- missing validation
+- documentation drift
+
+Do not modify production code.
+
+Return file, evidence, severity and recommended action.</pre>
+</div>
+<div class="card say">
+<p>“Actions ejecuta pasos declarativos. Automations dispara trabajo agentic definido por objetivo.”</p>
+</div>
+
+<h2>6. 57:00–72:00 — AGENT MERGE</h2>
+<div class="card do">
+<p>Abre el PR con CI rojo + feedback.</p>
+<pre>Prepare this pull request to be merge-ready.
+
+Address outstanding review feedback.
+Fix failing checks without weakening tests.
+Resolve merge conflicts while preserving intent.
+Do not change unrelated files.
+
+Then:
+1. run tests
+2. review final diff
+3. report human attention still required</pre>
+</div>
+<div class="card say">
+<p>“No estoy delegando una edición. Estoy delegando un estado deseado: merge-ready.”</p>
+</div>
+
+<h2>7. 72:00–86:00 — CODE REVIEW CON ESTADO</h2>
+<div class="card do">
+<p>Solicita Copilot Review → finding → fix/push → re-review.</p>
+<pre>Open
+Resolved since last review
+Previously missed</pre>
+</div>
+<div class="card say">
+<p>“La review deja de ser una fotografía. Empieza a seguir el lifecycle del finding.”</p>
+</div>
+
+<h2>8. 86:00–99:00 — CODEQL / AGENTIC AUTOFIX</h2>
+<div class="card do">
+<p>Abre `Program.cs` y enseña el SQL dinámico.</p>
+<pre>HTTP input → name → string interpolation → SQL</pre>
+</div>
+<div class="card say">
+<p>“CodeQL me ayuda con problemas en el código que hemos escrito.”</p>
+</div>
+<div class="card do">
+<p>Si tienes licencia:</p>
+<pre>Security
+→ Code scanning
+→ alert
+→ Assign to Copilot</pre>
+</div>
+<div class="card say">
+<p>“El agente propone el fix y el scanner original vuelve a validar. No quiero que la IA se auto-certifique.”</p>
+</div>
+
+<h2>9. 99:00–109:00 — DEPENDABOT / SUPPLY CHAIN</h2>
+
+<div class="card say">
+<b>TRANSICIÓN EXACTA:</b>
+<p>“CodeQL me ayuda con lo que escribo.”</p>
+<p>“Pero una aplicación no está formada solo por nuestro código.”</p>
+<p>“También está formada por todo lo que importamos.”</p>
+<p>“Aquí entra Dependabot.”</p>
+</div>
+
+<div class="card do">
+<b>ABRE:</b>
+<pre>.github/dependabot.yml</pre>
+<p>Señala:</p>
+<pre>package-ecosystem: "nuget"</pre>
+</div>
+
+<div class="card say">
+<p>“Esta entrada le dice a Dependabot que vigile las dependencias NuGet.”</p>
+</div>
+
+<div class="card do">
+<p>Ahora señala:</p>
+<pre>package-ecosystem: "github-actions"</pre>
+</div>
+
+<div class="card say">
+<p>“Y esto suele sorprender más: nuestros workflows también tienen dependencias.”</p>
+</div>
+
+<div class="card do">
+<p>Abre:</p>
+<pre>.github/workflows/dependabot-demo.yml</pre>
+<p>Enseña:</p>
+<pre>actions/checkout@v3
+actions/setup-dotnet@v3</pre>
+</div>
+
+<div class="card say">
+<p>“Estas versiones antiguas están aquí deliberadamente para la demo.”</p>
+<p>“No estoy diciendo que sean vulnerables. Estoy diciendo que están desactualizadas.”</p>
+</div>
+
+<div class="card do">
+<b>AHORA ABRE EL PR DE DEPENDABOT QUE DEJASTE PREPARADO.</b>
+</div>
+
+<div class="card say">
+<p>“Yo no he escrito este Pull Request.”</p>
+<p>“Dependabot ha comparado las referencias declaradas con las versiones disponibles y ha preparado el cambio.”</p>
+</div>
+
+<div class="card do">
+<b>DIBUJA / ENSEÑA:</b>
+<pre>VERSION UPDATE
+versión más nueva
+     ↓
+Dependabot PR
+
+SECURITY ALERT
+dependencia conocida como vulnerable
+     ↓
+alert
+
+SECURITY UPDATE
+hay versión corregida
+     ↓
+Dependabot puede proponer PR seguro</pre>
+</div>
+
+<div class="card say">
+<p>“No confundamos estas tres cosas.”</p>
+<p>“El schedule daily que acabamos de ver controla Version Updates.”</p>
+<p>“No significa que Dependabot espere al día siguiente para avisarnos de una vulnerabilidad.”</p>
+</div>
+
+<div class="card do">
+<b>MUESTRA LA ARQUITECTURA DE CONTROLES:</b>
+<pre>                 Pull Request
+                      ↓
+
+Copilot Review → lógica / contexto
+CodeQL         → nuestro código
+Dependabot     → supply chain / dependencias
+Secret scan    → secretos / credenciales</pre>
+</div>
+
+<div class="card say">
+<p>“No quiero una sola herramienta que me diga ‘todo está bien’.”</p>
+<p>“Quiero capas independientes de verificación.”</p>
+</div>
+
+<div class="card say">
+<b>PREGUNTA A LA SALA:</b>
+<p>“¿Cuántos revisáis las versiones de GitHub Actions con el mismo cuidado que NuGet o npm?”</p>
+</div>
+
+<h2>10. 109:00–117:00 — GOVERNANCE</h2>
+<div class="card do">
+<p>Abre `.devcontainer/devcontainer.json`.</p>
+</div>
+<div class="card say">
+<p>“El agente no necesita todo mi portátil. Necesita un entorno reproducible y acotado.”</p>
+</div>
+<div class="card do">
+<pre>dotnet test            → ALLOW
+deploy dev             → APPROVAL
+terraform destroy prod → BLOCK</pre>
+</div>
+<div class="card say">
+<p>“Managed Permissions es capacidad más política: autonomía dentro de una jaula.”</p>
+<p>“Approval assessment tampoco es lo mismo que actual approval.”</p>
+</div>
+
+<h2>11. 117:00–120:00 — CIERRE</h2>
+<div class="card say">
+<p>“Hoy no hemos aprendido a crear agentes. Hemos aprendido a operar trabajo agentic.”</p>
+<p>“Y hemos añadido una idea importante: el agente no trabaja solo. Está rodeado de verificadores independientes: review, CodeQL, Dependabot y secret scanning.”</p>
+<p>“La pregunta ya no es solo qué prompt utilizo. Es qué trabajo delego, qué lo dispara, qué herramientas puede usar y quién valida el resultado.”</p>
+<p>“¿Qué automatizaríais mañana? ¿Y qué jamás dejaríais ejecutar sin aprobación humana?”</p>
+</div>
+
+<h2>PLAN B</h2>
+<table>
+<tr><th>Falla</th><th>Qué haces</th></tr>
+<tr><td>Dependabot todavía no creó PR</td><td>Insights → Dependency graph → Dependabot → Recent update jobs → Check for updates. Si sigue sin salir, enseña el job log y una captura preparada.</td></tr>
+<tr><td>Agents tarda</td><td>Abre Completed.</td></tr>
+<tr><td>Chronicle no aparece</td><td>Explica con backup.</td></tr>
+<tr><td>Automations no aparece</td><td>Ejecuta el prompt manualmente.</td></tr>
+<tr><td>Agent Merge no aparece</td><td>Agent Mode con el mismo objetivo.</td></tr>
+<tr><td>No hay Agentic Autofix</td><td>Explica flujo CodeQL + fix + re-scan.</td></tr>
+</table>
+
+</main>
+</body>
+</html>

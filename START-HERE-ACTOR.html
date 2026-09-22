@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guion actor — GitHub Agentic SDLC 2026</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--blue:#79c0ff;--green:#3fb950;--purple:#d2a8ff;--yellow:#d29922;--red:#f85149;--muted:#8b949e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,sans-serif;line-height:1.62}
+header{padding:42px 5vw;background:#161b22;border-bottom:1px solid var(--line)}
+header h1{margin:0 0 8px;font-size:42px}
+header p{margin:5px 0;color:#b1bac4}
+nav{position:sticky;top:0;z-index:8;padding:10px 5vw;background:#0d1117ee;border-bottom:1px solid var(--line);white-space:nowrap;overflow:auto}
+nav a{color:var(--blue);text-decoration:none;margin-right:14px;font-size:13px}
+main{max-width:1180px;margin:auto;padding:28px 5vw 90px}
+h2{color:var(--blue);margin-top:46px;font-size:30px}
+h3{color:var(--purple);margin-top:28px}
+.scene{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:18px 0;padding:18px 20px}
+.action{border-left:5px solid var(--green)}
+.say{border-left:5px solid #2f81f7}
+.prompt{border-left:5px solid var(--purple)}
+.wait{border-left:5px solid var(--yellow)}
+.fail{border-left:5px solid var(--red)}
+.note{border-left:5px solid #8b949e}
+.label{display:inline-block;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:3px 8px;margin-bottom:9px}
+pre{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto}
+code{font-family:Consolas,monospace}
+.time{font-size:13px;background:#21262d;color:#c9d1d9;padding:4px 10px;border-radius:999px;margin-left:8px}
+.stage{color:#b1bac4;font-style:italic}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}th{background:#21262d}
+.big{font-size:19px;font-weight:700;color:#fff}
+</style>
+</head>
+<body>
+<header>
+<h1>GitHub Agentic SDLC 2026 — Guion de actor</h1>
+<p>Palabra por palabra · acción por acción · prompt por prompt</p>
+<p>Duración objetivo: 1 h 50 min + 10 min de margen/preguntas</p>
+</header>
+
+<nav>
+<a href="#pre">Antes</a>
+<a href="#open">Apertura</a>
+<a href="#agents">Agents</a>
+<a href="#cli">Web→CLI</a>
+<a href="#chronicle">Chronicle</a>
+<a href="#automations">Automations</a>
+<a href="#merge">Agent Merge</a>
+<a href="#review">Review</a>
+<a href="#codeql">CodeQL</a>
+<a href="#dependabot">Dependabot</a>
+<a href="#gov">Governance</a>
+<a href="#close">Cierre</a>
+</nav>
+
+<main>
+
+<section id="pre">
+<h2>ANTES DE QUE ENTRE LA GENTE <span class="time">T-20 min</span></h2>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre PowerShell en la raíz del repo y ejecuta:</p>
+<pre>Set-ExecutionPolicy -Scope Process Bypass
+
+.\scripts\01-preflight.ps1</pre>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Si todavía no preparaste el repo:</p>
+<pre>.\scripts\02-prepare-demo.ps1
+
+.\scripts\03-publish-to-github.ps1 `
+  -RepoName "github-copilot-agentic-sdlc-demo"</pre>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre el PR:</p>
+<pre>Validate prediction bonus points</pre>
+<p>Espera a que CI esté rojo.</p>
+<p>En <b>Files changed → PredictionService.cs</b>, añade:</p>
+<pre>Bonus points must not accept negative values.
+Please add a regression-safe validation
+without weakening the existing test.</pre>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Prepara Dependabot:</p>
+<pre>Insights
+→ Dependency graph
+→ Dependabot
+→ github-actions
+→ Recent update jobs
+→ Check for updates</pre>
+<p>Repite para NuGet. Deja abierto un PR de Dependabot si aparece.</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Deja abiertas estas pestañas en este orden:</p>
+<pre>1. GitHub → Agents
+2. PR demo
+3. Actions
+4. Security → Code scanning
+5. PR de Dependabot
+6. VS Code con Program.cs y PredictionService.cs
+7. PowerShell
+8. Copilot CLI
+9. Este HTML en segundo monitor</pre>
+</div>
+
+<div class="scene note">
+<div class="label">REGLA</div>
+<p>Si una preview no aparece en 45 segundos: no arregles nada en directo. Di que depende de rollout/política/licencia, enseña backup y sigue.</p>
+</div>
+</section>
+
+<section id="open">
+<h2>00:00–03:00 — APERTURA</h2>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Quédate en GitHub, con la pestaña <b>Agents</b> ya visible pero sin pulsar nada.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Buenos días. Antes de empezar quiero ver rápidamente dónde estamos.”</p>
+<p>“¿Cuántos utilizáis GitHub Copilot prácticamente todos los días?”</p>
+<p class="stage">[Espera dos o tres segundos y mira la sala.]</p>
+<p>“¿Agent Mode? ¿Custom Agents? ¿Skills?”</p>
+<p>“Perfecto.”</p>
+<p>“Entonces hoy no vamos a aprender a crear agentes.”</p>
+<p>“Vamos a aprender a operar una organización donde los agentes ya existen.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>Issue / PR / horario / alerta
+            ↓
+       Agent session
+            ↓
+ tools + repo + shell + checks
+            ↓
+      trabajo verificable</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“La idea de hoy es muy sencilla.”</p>
+<p>“La pregunta ya no es solamente qué prompt utilizo.”</p>
+<p>“Empieza a ser: qué trabajo delego, qué evento lo dispara, qué herramientas puede usar, quién valida el resultado y dónde necesito intervención humana.”</p>
+<p>“Vamos directamente a verlo.”</p>
+</div>
+</section>
+
+<section id="agents">
+<h2>03:00–18:00 — AGENTS + TRAZABILIDAD</h2>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Pulsa <b>Agents</b>.</p>
+<p>Señala con el ratón: <b>Active</b>, <b>Completed</b>, <b>Explain repository</b>, <b>Create a plan</b>.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Fijaos en una cosa antes de hacer nada.”</p>
+<p>“Agents está al mismo nivel que Code, Issues y Pull Requests.”</p>
+<p>“Eso es importante porque GitHub está tratando una sesión agentic como trabajo del repositorio, no como un chat aislado.”</p>
+<p>“Una sesión puede tener conversación, pero también herramientas, comandos, cambios, estado y un Pull Request asociado.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Crea una nueva sesión.</p>
+</div>
+
+<div class="scene prompt">
+<div class="label">PEGAS</div>
+<pre>Investigate this repository.
+
+Find the most important issue that could cause a production incident.
+
+Do not modify code initially.
+
+Explain:
+- the evidence
+- affected files
+- likely failure path
+- what still requires human verification
+
+Only after the investigation, propose the smallest safe remediation.</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES MIENTRAS ARRANCA</div>
+<p>“No quiero que miréis todavía la respuesta final.”</p>
+<p>“Quiero que miréis cómo trabaja.”</p>
+<p>“En este tipo de sesiones, para mí la parte importante no es solo la conclusión: es el trail de ejecución.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre logs/tool calls. Expande dos o tres operaciones.</p>
+<p>Busca cosas como lectura de fichero, búsqueda, comandos, salida de herramientas o diff.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Aquí tengo trazabilidad.”</p>
+<p>“Puedo comprobar qué archivos ha leído, qué búsquedas ha hecho, qué comandos ha ejecutado y en qué evidencia basa la conclusión.”</p>
+<p>“Para empresa, una respuesta correcta no es suficiente. Necesito poder auditar cómo se ha llegado a ella.”</p>
+</div>
+
+<div class="scene wait">
+<div class="label">SI DETECTA EL TEST</div>
+<p>Si menciona <code>BonusPoints</code> o el test fallando, dices:</p>
+<p>“Perfecto. Aquí ya tenemos una evidencia reproducible: código más test fallando.”</p>
+<p>“Esto ya no es una opinión del modelo.”</p>
+</div>
+
+<div class="scene fail">
+<div class="label">SI TARDA</div>
+<p>Abre una sesión <b>Completed</b>.</p>
+<p>Dices: “La ejecución cloud puede tardar; para no perder tiempo voy a usar una sesión ya terminada y enseñaros exactamente la misma trazabilidad.”</p>
+</div>
+
+<div class="scene say">
+<div class="label">TRANSICIÓN</div>
+<p>“Y ahora viene una cosa que parece pequeña, pero cambia bastante el concepto de sesión.”</p>
+<p>“Voy a sacar este mismo trabajo de GitHub.com.”</p>
+</div>
+</section>
+
+<section id="cli">
+<h2>18:00–27:00 — MISMA SESIÓN EN COPILOT CLI</h2>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Dentro de la sesión pulsa <b>Continue in Copilot CLI</b>.</p>
+<p>Copia el comando y pégalo en PowerShell.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“No estoy empezando otro chat.”</p>
+<p>“Estoy continuando exactamente la misma sesión desde otra interfaz.”</p>
+<p>“Interfaz y sesión no son lo mismo.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>GitHub.com
+    \
+     → SAME SESSION
+    /
+Copilot CLI</pre>
+</div>
+
+<div class="scene prompt">
+<div class="label">PEGAS EN CLI</div>
+<pre>Summarize what you already investigated.
+
+Tell me:
+- what you are confident about
+- what remains uncertain
+- what requires human verification</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“La consecuencia práctica es interesante.”</p>
+<p>“Una investigación puede empezar en GitHub, continuar en terminal y terminar en un Pull Request sin perder la identidad del trabajo.”</p>
+</div>
+
+<div class="scene fail">
+<div class="label">SI NO APARECE CONTINUE IN CLI</div>
+<p>Enseña backup.</p>
+<p>Dices: “La parte importante no es este botón concreto. Es que la sesión tiene estado independiente de la interfaz.”</p>
+</div>
+</section>
+
+<section id="chronicle">
+<h2>27:00–36:00 — CHRONICLE / HISTORIAL AGENTIC</h2>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Si las sesiones tienen estado, la siguiente pregunta es qué hacemos con el historial de todo ese trabajo.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>En Copilot CLI escribe:</p>
+<pre>/chronicle</pre>
+</div>
+
+<div class="scene prompt">
+<div class="label">PEGAS</div>
+<pre>Summarize my recent agent sessions related to bugs, CI or security.
+
+What recurring problems appear?</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Git history me dice qué cambió en el código.”</p>
+<p>“El historial de sesiones me permite saber qué se investigó, qué se intentó, qué se validó y qué problemas se repiten.”</p>
+<p>“Yo lo pienso como memoria operacional del trabajo agentic.”</p>
+<p>“No sustituye Git. Es otra capa de historia.”</p>
+</div>
+
+<div class="scene fail">
+<div class="label">SI NO ESTÁ DISPONIBLE</div>
+<p>Dices: “Esta capacidad depende del rollout que tengamos disponible. No la voy a convertir en una dependencia de la sesión.”</p>
+<p>Enseña backup y sigue.</p>
+</div>
+</section>
+
+<section id="automations">
+<h2>36:00–50:00 — AUTOMATIONS</h2>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Hasta ahora sigue ocurriendo una cosa: somos nosotros quienes iniciamos el trabajo.”</p>
+<p>“Ahora voy a quitar incluso ese paso.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Vuelve a GitHub → <b>Agents → Automations → Create new</b>.</p>
+</div>
+
+<div class="scene action">
+<div class="label">CONFIGURAS</div>
+<pre>Name:
+Daily Repository Health
+
+Trigger:
+Daily</pre>
+</div>
+
+<div class="scene prompt">
+<div class="label">PEGAS</div>
+<pre>Review this repository for:
+- failing or flaky tests
+- stale TODO/FIXME
+- dependency risks
+- missing validation
+- documentation drift
+
+Do not modify production code.
+
+Produce a concise engineering report with:
+- file
+- evidence
+- severity
+- recommended action</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Y aquí quiero separar dos conceptos.”</p>
+<p>“Esto no sustituye GitHub Actions.”</p>
+<p>“Actions ejecuta pasos declarativos que nosotros hemos definido.”</p>
+<p>“Aquí describimos trabajo y un objetivo; el agente decide cómo investigarlo dentro de las capacidades que tenga.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>Daily ─────────────→ repository health
+Issue created ─────→ technical triage
+PR opened ─────────→ documentation / quality check</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Hasta ahora usábamos IA cuando nos acordábamos.”</p>
+<p>“Automations permite convertirla en parte del proceso.”</p>
+</div>
+
+<div class="scene fail">
+<div class="label">SI NO APARECE AUTOMATIONS</div>
+<p>Ejecuta manualmente el mismo prompt.</p>
+<p>Dices: “El output no es la novedad. La novedad es que el trigger puede crear este trabajo sin una persona abriendo un chat.”</p>
+</div>
+</section>
+
+<section id="merge">
+<h2>50:00–65:00 — AGENT MERGE / GOAL-DRIVEN DEVELOPMENT</h2>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre el PR <b>Validate prediction bonus points</b>.</p>
+<p>Señala CI rojo y el comentario de review.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Aquí podría pedir tres cosas.”</p>
+<p>“Arregla el test.”</p>
+<p>“Responde el review.”</p>
+<p>“Resuelve el conflicto.”</p>
+<p>“Pero esas son tareas intermedias.”</p>
+<p>“Mi objetivo real es mucho más sencillo: deja este PR merge-ready.”</p>
+</div>
+
+<div class="scene prompt">
+<div class="label">PEGAS</div>
+<pre>Prepare this pull request to be merge-ready.
+
+Address outstanding review feedback.
+
+Fix failing checks without weakening tests.
+
+Resolve merge conflicts while preserving
+the intent of both branches.
+
+Do not make unrelated changes.
+
+When finished:
+1. run relevant tests
+2. review the final diff
+3. report anything still requiring human attention</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Aquí cambia el nivel de abstracción.”</p>
+<p>“No estoy delegando una edición.”</p>
+<p>“Estoy delegando un estado deseado.”</p>
+<p>“Eso es goal-driven development.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>review feedback ─┐
+failed checks ───┼──→ merge-ready
+merge conflict ──┘</pre>
+</div>
+
+<div class="scene fail">
+<div class="label">SI NO APARECE AGENT MERGE</div>
+<p>Usa Agent Mode con el mismo prompt.</p>
+<p>Dices: “Estoy reproduciendo manualmente el mismo patrón goal-driven.”</p>
+</div>
+</section>
+
+<section id="review">
+<h2>65:00–79:00 — COPILOT CODE REVIEW CON ESTADO</h2>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Copilot Code Review seguramente ya lo conocéis.”</p>
+<p>“Lo interesante ahora no es que encuentre un comentario.”</p>
+<p>“Lo interesante es qué ocurre entre una review y la siguiente.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Solicita Copilot Review.</p>
+<p>Abre un finding.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Este finding está abierto.”</p>
+<p>“Ahora voy a corregirlo y pedir otra review.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Haz el fix/push si todavía no lo hizo Agent Merge.</p>
+<p>Solicita re-review.</p>
+</div>
+
+<div class="scene action">
+<div class="label">BUSCAS</div>
+<pre>Open
+Resolved since last review
+Previously missed</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“La review deja de ser una fotografía aislada.”</p>
+<p>“Empieza a seguir el lifecycle del finding.”</p>
+<p>“Y además puede usar herramientas para validar hipótesis: build, tests o scripts.”</p>
+<p>“Por tanto, no solo lee el diff. Puede comprobar cosas.”</p>
+</div>
+</section>
+
+<section id="codeql">
+<h2>79:00–92:00 — CODEQL / AGENTIC AUTOFIX</h2>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre en VS Code:</p>
+<pre>src/AgenticDemo.Api/Program.cs</pre>
+<p>Busca:</p>
+<pre>var sql =
+    $"SELECT Id, Name, Team FROM Players WHERE Name LIKE '%{name}%'";</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Aquí tenemos una vulnerabilidad deliberada.”</p>
+<p>“Tenemos input HTTP entrando directamente en construcción SQL.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>HTTP input
+   ↓
+name
+   ↓
+string interpolation
+   ↓
+SQL</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Esto es un caso perfecto para CodeQL.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">SI TIENES LICENCIA</div>
+<pre>Security
+→ Code scanning
+→ alert
+→ Assign to Copilot</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Aquí no quiero simplemente Generate Fix.”</p>
+<p>“El agente investiga, propone el cambio y el scanner original vuelve a validar.”</p>
+<p>“No quiero que la IA se auto-certifique.”</p>
+<p>“Quiero un verificador independiente.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>alert
+ ↓
+Copilot investiga
+ ↓
+fix
+ ↓
+rerun CodeQL
+ ↓
+alert cerrado?
+ ↓
+draft PR</pre>
+</div>
+
+<div class="scene say">
+<div class="label">TRANSICIÓN</div>
+<p>“Hasta aquí hemos hablado de nuestro código.”</p>
+<p>“Pero una aplicación no está formada solamente por lo que escribimos.”</p>
+<p>“También está formada por lo que importamos.”</p>
+</div>
+</section>
+
+<section id="dependabot">
+<h2>92:00–102:00 — DEPENDABOT / SUPPLY CHAIN</h2>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“CodeQL me ayuda con lo que escribo.”</p>
+<p>“Dependabot me ayuda con lo que importo.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre:</p>
+<pre>.github/dependabot.yml</pre>
+</div>
+
+<div class="scene action">
+<div class="label">SEÑALAS</div>
+<pre>package-ecosystem: "nuget"</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Esta entrada le dice a Dependabot que revise nuestras dependencias .NET.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">SEÑALAS</div>
+<pre>package-ecosystem: "github-actions"</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Y esta parte se olvida muchísimo.”</p>
+<p>“Nuestros workflows también tienen dependencias.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre:</p>
+<pre>.github/workflows/dependabot-demo.yml</pre>
+<p>Señala:</p>
+<pre>actions/checkout@v3
+actions/setup-dotnet@v3</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Estas versiones antiguas están aquí deliberadamente para la demo.”</p>
+<p>“No estoy diciendo que sean vulnerables.”</p>
+<p>“Estoy diciendo que Dependabot puede detectar que están desactualizadas y preparar la actualización.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Cambia a la pestaña con el PR de Dependabot.</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Yo no he escrito este Pull Request.”</p>
+<p>“Dependabot ha detectado una dependencia desactualizada y ha preparado el cambio.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>VERSION UPDATE
+hay una versión más reciente
+→ Dependabot PR
+
+SECURITY ALERT
+GitHub conoce una vulnerabilidad
+→ alert
+
+SECURITY UPDATE
+hay una versión corregida
+→ Dependabot puede abrir PR</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“No confundamos estas tres cosas.”</p>
+<p>“El schedule daily de dependabot.yml controla las comprobaciones de version updates.”</p>
+<p>“No significa que una vulnerabilidad conocida tenga que esperar al día siguiente.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>Copilot Review → lógica / contexto
+CodeQL         → nuestro código
+Dependabot     → supply chain
+Secret scan    → secretos / credenciales</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“No quiero una única herramienta diciendo ‘todo está bien’.”</p>
+<p>“Quiero capas independientes de verificación.”</p>
+<p>“Y os hago una pregunta: ¿cuántos revisáis las versiones de GitHub Actions con el mismo cuidado que NuGet o npm?”</p>
+</div>
+
+<div class="scene fail">
+<div class="label">SI NO HAY PR DE DEPENDABOT</div>
+<p>Ve a Insights → Dependency graph → Dependabot → Recent update jobs → Check for updates.</p>
+<p>Si sigue sin aparecer, enseña el job log/captura y sigue.</p>
+</div>
+</section>
+
+<section id="gov">
+<h2>102:00–113:00 — GOVERNANCE / BLAST RADIUS</h2>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Cuanto más autónomo es el agente, menos me preocupa solamente el modelo.”</p>
+<p>“Me empieza a preocupar el blast radius.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">ACCIÓN</div>
+<p>Abre:</p>
+<pre>.devcontainer/devcontainer.json</pre>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>HOST
+SSH keys
+credenciales
+Azure CLI
+archivos personales
+
+      X
+
+DEV CONTAINER
+repo
+runtime
+tests
+tooling</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Un agente no necesita todo mi portátil.”</p>
+<p>“Necesita un entorno reproducible y acotado.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>dotnet test
+→ ALLOW
+
+deploy dev
+→ APPROVAL
+
+terraform destroy prod
+→ BLOCK</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Eso es capacidad más política.”</p>
+<p>“No se trata de Copilot ON u OFF.”</p>
+<p>“Se trata de decidir qué puede hacer, cuándo necesita aprobación y qué está prohibido.”</p>
+<p>“Mi frase para esto es: autonomía dentro de una jaula.”</p>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Y una última pregunta incómoda.”</p>
+<p>“¿Puede Copilot aprobar un Pull Request?”</p>
+<p>“Sí, si la política administrativa lo habilita.”</p>
+<p>“Pero approval assessment no es lo mismo que actual approval.”</p>
+</div>
+
+<div class="scene action">
+<div class="label">MUESTRAS</div>
+<pre>Approval assessment
+→ Copilot considera que está listo
+→ no es una aprobación real
+
+Actual approval
+→ aprobación real
+→ puede contar según la política</pre>
+</div>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Gobernanza no significa impedir que el agente trabaje.”</p>
+<p>“Significa controlar su radio de acción.”</p>
+</div>
+</section>
+
+<section id="close">
+<h2>113:00–118:00 — PREGUNTAS / DEBATE</h2>
+
+<div class="scene say">
+<div class="label">DICES</div>
+<p>“Antes de cerrar, os lanzo dos preguntas.”</p>
+<p>“¿Qué tarea repetitiva de vuestro SDLC automatizaríais mañana?”</p>
+<p>“¿Y qué acción jamás permitiríais que un agente ejecutara sin aprobación humana?”</p>
+<p class="stage">[Deja hablar. Usa 3–5 minutos.]</p>
+</div>
+
+<h2>118:00–120:00 — CIERRE</h2>
+
+<div class="scene say">
+<div class="label">DICES LITERALMENTE</div>
+<p>“Hoy no hemos aprendido a crear agentes.”</p>
+<p>“Hemos aprendido a operar trabajo agentic.”</p>
+<p>“Hemos visto trazabilidad, continuidad entre interfaces, memoria operacional, automatización por eventos, PRs tratados como objetivos, reviews con estado, seguridad validada por analizadores independientes y supply chain controlada con Dependabot.”</p>
+<p>“Y sobre todo hemos visto que un agente no debería trabajar solo: tiene que estar rodeado de checks, scanners, políticas y checkpoints humanos.”</p>
+<p>“La siguiente pregunta ya no es únicamente qué prompt utilizo.”</p>
+<p>“Es qué trabajo delego, qué lo dispara, qué herramientas puede utilizar y quién verifica el resultado.”</p>
+<p>“Gracias.”</p>
+</div>
+</section>
+
+<section>
+<h2>RECUPERACIÓN RÁPIDA</h2>
+<table>
+<tr><th>Problema</th><th>Qué haces</th></tr>
+<tr><td>Rama rota</td><td><code>.\scripts\04-reset-local.ps1 -State broken</code></td></tr>
+<tr><td>Necesitas estado correcto</td><td><code>.\scripts\04-reset-local.ps1 -State merge-ready</code></td></tr>
+<tr><td>Agents tarda</td><td>Abre Completed.</td></tr>
+<tr><td>Chronicle no aparece</td><td>Backup + explicación.</td></tr>
+<tr><td>Automations no aparece</td><td>Prompt manual + explica trigger.</td></tr>
+<tr><td>Agent Merge no aparece</td><td>Agent Mode con el mismo prompt.</td></tr>
+<tr><td>Code Review tarda</td><td>PR/captura preparada.</td></tr>
+<tr><td>No hay Agentic Autofix</td><td>Explica flujo CodeQL + rescan.</td></tr>
+<tr><td>No hay PR de Dependabot</td><td>Check for updates + job log/captura.</td></tr>
+</table>
+</section>
+
+</main>
+</body>
+</html>

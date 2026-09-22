@@ -1,0 +1,14 @@
+{
+  "name": "Agentic SDLC Demo",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+  "postCreateCommand": "dotnet restore tests/AgenticDemo.Api.Tests/AgenticDemo.Api.Tests.csproj",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-dotnettools.csdevkit"
+      ]
+    }
+  }
+}
