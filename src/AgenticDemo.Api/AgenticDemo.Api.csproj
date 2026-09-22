@@ -8,6 +8,6 @@
   <!-- Intentionally old for the Dependabot VERSION UPDATE demo.
        Do not describe this as a known security vulnerability. -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
   </ItemGroup>
 </Project>
