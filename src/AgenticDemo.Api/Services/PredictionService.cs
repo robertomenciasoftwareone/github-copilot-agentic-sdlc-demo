@@ -12,8 +12,14 @@ public sealed class PredictionService
         ArgumentException.ThrowIfNullOrWhiteSpace(userName);
         ArgumentException.ThrowIfNullOrWhiteSpace(match);
 
-        // TRAINING BUG:
-        // negative bonus points are deliberately not validated.
+        if (homeGoals < 0 || awayGoals < 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(homeGoals),
+                "Goals cannot be negative.");
+        }
+
+        // BonusPoints is still deliberately missing.
 
         return bonusPoints;
     }
